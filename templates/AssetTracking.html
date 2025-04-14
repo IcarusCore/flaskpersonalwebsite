@@ -1,0 +1,85 @@
+<?php
+$title = "Michael Jolley - Asset Management Form";
+include 'header.php'; // Include header and navigation
+?>
+
+<section class="project-detail">
+    <h2>Asset Management Form</h2>
+    <div class="project-content">
+        <h3>Project Overview</h3>
+        <p>Designed an asset management application formerly in PowerShell now built in C# with .NET. This app was built to help the IT Desktop Team track individual user inventory with ease.</p>
+
+        <h3>Project Images</h3>
+        <div class="project-images">
+            <?php
+            $images = ["assetmangii.jpg", "assetmangs.jpg"];
+            foreach ($images as $img) {
+                echo "<img src='/assets/img/{$img}' alt='Asset Management Image' class='project-img'>";
+            }
+            ?>
+        </div>
+
+        <h3>Base Code/Configuration</h3>
+        <p>Below is a snippet of my code used to create this app:</p>
+        <pre class="code-snippet">
+private void BtnUpdateApp_Click(object? sender, EventArgs e)
+{
+    try
+    {
+        // 1. Read the latest version from the server
+        string versionFilePath = @"\\Server\Pathway\Scripts_Forms\7. Asset_Tracking\Updater\latest_version.txt";
+        string latestVersion = File.ReadAllText(versionFilePath).Trim();
+
+        // 2. Compare with the current version
+        Version current = new Version(AppInfo.CurrentVersion);
+        Version remote = new Version(latestVersion);
+
+        if (remote <= current)
+        {
+            MessageBox.Show("You already have the latest version.",
+                            "No Update Needed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+            return;
+        }
+
+        // 3. Prompt user
+        DialogResult dr = MessageBox.Show(
+            $"A new version ({remote}) is available. Would you like to update?",
+            "Update Available",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        );
+
+        if (dr == DialogResult.Yes)
+        {
+            // 4. Download the new EXE to a temp folder
+            string serverExePath = $@"C:\Temp\HardwareInventoryTracker.exe";
+            string localTempPath = Path.Combine(Path.GetTempPath(), $"HardwareInventoryTracker.exe");
+            File.Copy(serverExePath, localTempPath, true);
+
+            // 5. Launch the external Updater app
+            string updaterPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "MyApp.Updater.exe"
+            );
+            Process.Start(updaterPath, $"\"{localTempPath}\" \"{Application.ExecutablePath}\"");
+
+            // 6. Close the current app for the updater to replace it
+            Application.Exit();
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show("Error while updating:\n" + ex.Message,
+                        "Update Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+    }
+}
+        </pre>
+    </div>
+    <a href="/portfolio" class="btn">Back to Portfolio</a>
+</section>
+
+<?php include 'footer.php'; // Include footer ?>

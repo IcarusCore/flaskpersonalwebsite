@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="about">
+    <img src="{{ url_for('static', filename='img/img/headshot.jpg') }}" alt="Michael Jolley" class="about-img">
+    <h2>About Me</h2>
+    <div class="about-text">
+        <p>I’m Michael Jolley, an IT Technician III at the SC Department of Motor Vehicles, bringing over six years of experience to the table. I lead major tech rollouts—think branch openings, software implementations, and system upgrades—while also serving as the go-to lead tech for desktop support tools. My knack for hardware maintenance and agency-specific software troubleshooting helps keep everything running smoothly, and I pride myself on tackling even the trickiest technical issues with precision.</p>
+        <p>Driven by a passion for technology, I’m always staying ahead of the curve. Certifications like <em>The Complete Cyber Security Course: Hackers Exposed</em> and <em>Automating Administration with Windows PowerShell</em> keep me sharp. Whether I’m troubleshooting servers or configuring networks, I thrive on the challenge. I also enjoy digging into new projects and expanding my knowledge through online courses on Udemy and Coursera.</p>
+        <p>Beyond the office, I’ve built an advanced home lab where I sharpen my server skills. Powered by Proxmox and Unraid for virtualization, it’s loaded with Linux and Windows servers, plus a few PC VMs for testing. I dive into real-world simulations like Active Directory management, DNS/DHCP setups, network security tweaks—you name it. It’s my space for mastering virtualization and system management, all to elevate my professional capabilities.</p>
+    </div>
+    <div class="highlights-box">
+        <h3>Key Achievements</h3>
+        <ul>
+            {% for highlight in highlights %}
+                <li class="highlight-item">{{ highlight }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

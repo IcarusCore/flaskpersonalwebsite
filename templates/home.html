@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block welcome %}
+<section class="welcome">
+    <div id="particles-js"></div>
+    <div class="welcome-content">
+        <h1 class="name">Michael Jolley</h1>
+        <p class="subtitle">IT Technician III at SC Department of Motor Vehicles | Specializing in Hardware Maintenance</p>
+        <div class="welcome-actions">
+            <a href="{{ url_for('portfolio') }}" class="btn">Explore Portfolio</a>
+            <a href="{{ url_for('about') }}" class="btn-alt">About Me</a>
+            <a href="{{ url_for('contact') }}" class="btn-alt">Get in Touch</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="highlights">
+    <h2>Highlights</h2>
+    <div class="skills-grid">
+        {% for highlight in highlights %}
+            <div class="skill-card">
+                <h3>{{ highlight.title }}</h3>
+                <p>{{ highlight.desc }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="projects">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+        {% for project in featured_projects %}
+            <div class="project-card">
+                <a href="{{ url_for(project.link) }}">
+                    <img src="{{ url_for('static', filename='img/' + project.img) }}" alt="{{ project.title }}" loading="lazy">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.desc }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('portfolio') }}" class="btn">View Full Portfolio</a>
+</section>
+{% endblock %}

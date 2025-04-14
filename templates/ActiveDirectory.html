@@ -1,0 +1,78 @@
+<?php
+$title = "Michael Jolley - Active Directory Configuration";
+include 'header.php'; // Include header and navigation
+?>
+
+<section class="project-detail">
+    <h2>Active Directory Configuration Tool</h2>
+    <div class="project-content">
+        <h3>Project Overview</h3>
+        <p>Created an application formerly using PowerShell now C# with .NET to allow technicians to move over computers from the root OU into their correct office OUs without the need to remote into their computers.</p>
+
+        <h3>Project Images</h3>
+        <div class="project-images">
+            <?php
+            $images = ["admover.jpg", "admoveri.jpg", "admoverii.jpg"];
+            foreach ($images as $img) {
+                echo "<img src='/assets/img/{$img}' alt='Active Directory Configuration Image' class='project-img'>";
+            }
+            ?>
+        </div>
+
+        <h3>Base Code/Configuration</h3>
+        <p>Below is a snippet of the code to create the Active Directory Configuration Tool:</p>
+        <pre class="code-snippet">
+private async void MoveButton_Click(object sender, RoutedEventArgs e)
+{
+    var selectedComputers = computerListBox.SelectedItems.Cast<string>().ToList();
+    string selectedSubOU = subOUComboBox.SelectedItem?.ToString();
+    string selectedChildOU = childOUComboBox.SelectedItem?.ToString();
+
+    if (!ValidateSelections(selectedComputers, selectedChildOU)) return;
+
+    string computerList = string.Join(", ", selectedComputers);
+    var confirmResult = MessageBox.Show(
+        $"Are you sure you want to move {computerList} to {selectedSubOU} -> {selectedChildOU}?",
+        "Confirm Move",
+        MessageBoxButton.YesNo,
+        MessageBoxImage.Question);
+
+    if (confirmResult != MessageBoxResult.Yes) return;
+
+    progressBar.Visibility = Visibility.Visible;
+    moveButton.IsEnabled = false;
+    refreshButton.IsEnabled = false;
+
+    try
+    {
+        await Task.Run(() =>
+        {
+            using (PrincipalContext context = new PrincipalContext(ContextType.Domain, "MyDomain"))
+            {
+                foreach (string computer in selectedComputers)
+                {
+                    MoveComputer(context, computer, childOUMap[selectedChildOU]);
+                }
+            }
+        });
+        MessageBox.Show($"Successfully moved {computerList} to {selectedSubOU} -> {selectedChildOU}",
+            "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        RefreshData();
+    }
+    catch (Exception ex)
+    {
+        HandleError(ex, selectedComputers, selectedChildOU);
+    }
+    finally
+    {
+        progressBar.Visibility = Visibility.Hidden;
+        moveButton.IsEnabled = true;
+        refreshButton.IsEnabled = true;
+    }
+}
+        </pre>
+    </div>
+    <a href="/portfolio" class="btn">Back to Portfolio</a>
+</section>
+
+<?php include 'footer.php'; // Include footer ?>

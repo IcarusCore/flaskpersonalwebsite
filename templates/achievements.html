@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Achievements{% endblock %}
+
+{% block content %}
+<section class="certifications">
+    <h2>Certifications / Courses</h2>
+    <div class="certification-grid">
+        {% for cert in certifications %}
+            <div class="certification-item">
+                <img src="{{ url_for('static', filename=cert.img) }}" alt="{{ cert.title }}" class="certification-img" data-fullsize="{{ url_for('static', filename=cert.img) }}">
+                <h3>{{ cert.title }}</h3>
+                <p>{{ cert.desc }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="certifications awards">
+    <h2>Awards</h2>
+    <div class="certification-grid">
+        {% for award in awards %}
+            <div class="certification-item">
+                <img src="{{ url_for('static', filename=award.img) }}" alt="{{ award.title }}" class="certification-img" data-fullsize="{{ url_for('static', filename=award.img) }}">
+                <h3>{{ award.title }}</h3>
+                <p>{{ award.desc }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Modal for full-size image -->
+<div id="imageModal" class="modal">
+    <span class="modal-close">×</span>
+    <div class="modal-content">
+        <img id="modalImage" alt="Enlarged view">
+    </div>
+</div>
+
+<script>
+    // Get modal elements
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.getElementsByClassName("modal-close")[0];
+
+    // Ensure modal is hidden on load
+    modal.style.display = "none";
+
+    // Get all certification images
+    const images = document.getElementsByClassName("certification-img");
+
+    // Add click event to each image
+    for (let img of images) {
+        img.onclick = function() {
+            modal.style.display = "flex";
+            modalImg.src = this.getAttribute("data-fullsize");
+        }
+    }
+
+    // Close modal on 'X' click
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        modalImg.src = ""; // Clear image to prevent flash
+    }
+
+    // Close modal on outside click
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            modalImg.src = ""; // Clear image to prevent flash
+        }
+    }
+</script>
+{% endblock %}

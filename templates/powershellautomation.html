@@ -1,0 +1,74 @@
+<?php
+$title = "Michael Jolley - PowerShell Automation";
+include 'header.php'; // Include header and navigation
+?>
+
+<section class="project-detail">
+    <h2>PowerShell Automation</h2>
+    <div class="project-content">
+        <h3>Project Overview</h3>
+        <p><h4>Developed/Enhanced automation scripts to streamline technicians PC Setup times, updates, and reports with automated PC Software Deployments.</h4></p>
+        <ul style="list-style-type: none; margin-left: 20px;">
+            <li>- The code utilizes XAML for a more polished appearance while using PowerShell to create the automations!</li>
+        </ul>
+        <p> </p>
+        <p><small> ⭐ For proper credit, the original baseline code was created by a prior coworker 'Joseph S.' Based off his code I have transformed it into a visual interactive application!</small></p>
+
+        <h3>Project Images</h3>
+        <div class="project-images">
+            <?php
+            $images = ["autodeployer.jpg", "autodeployeri.jpg"];
+            foreach ($images as $img) {
+                echo "<img src='/assets/img/{$img}' alt='Project Image' class='project-img'>";
+            }
+            ?>
+        </div>
+        <h3>Base Code/Configuration</h3>
+        <p>Below is a snippet of the PowerShell script for automating PC Software Installation:</p>
+        <pre class="code-snippet">
+&lt;Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="SCDMV AutoDeploy System"
+    Height="590"
+    Width="635"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"&gt;
+    &lt;Window.Resources&gt;
+        &lt;Style TargetType="TabItem"&gt;
+            &lt;Setter Property="FontSize" Value="16"/&gt;
+            &lt;Setter Property="FontWeight" Value="Bold"/&gt;
+            &lt;Setter Property="Foreground" Value="White"/&gt;
+            &lt;Setter Property="Background" Value="#FF494949"/&gt;
+            &lt;Setter Property="Template"&gt;
+                &lt;Setter.Value&gt;
+                    &lt;ControlTemplate TargetType="TabItem"&gt;
+                        &lt;Border x:Name="Border"
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}"
+                                Padding="10,5"&gt;
+                            &lt;ContentPresenter x:Name="ContentSite"
+                                              ContentSource="Header"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/&gt;
+                        &lt;/Border&gt;
+                        &lt;ControlTemplate.Triggers&gt;
+                            &lt;Trigger Property="IsSelected" Value="True"&gt;
+                                &lt;Setter TargetName="Border" Property="Background" Value="#FF009AFF"/&gt;
+                            &lt;/Trigger&gt;
+                            &lt;Trigger Property="IsMouseOver" Value="True"&gt;
+                                &lt;Setter TargetName="Border" Property="Background" Value="#FF72BCEC"/&gt;
+                                &lt;Setter Property="Cursor" Value="Hand"/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/ControlTemplate.Triggers&gt;
+                    &lt;/ControlTemplate&gt;
+                &lt;/Setter.Value&gt;
+            &lt;/Setter&gt;
+        &lt;/Style&gt;
+    &lt;/Window.Resources&gt;
+&lt;/Window&gt;
+</pre>
+    </div>
+    <a href="/portfolio" class="btn">Back to Portfolio</a>
+</section>
+
+<?php include 'footer.php'; // Include footer ?>

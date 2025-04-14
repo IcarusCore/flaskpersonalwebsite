@@ -1,0 +1,636 @@
+/* Welcome Section (Home Page) */
+.welcome {
+    position: relative;
+    width: 100vw;
+    min-height: 63vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--hero-bg);
+    padding: 0;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: background 0.3s;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: clamp(600px, 90vw, 900px);
+    width: clamp(90%, 95vw, 100%);
+    padding: clamp(1.5rem, 4vw, 2rem);
+}
+
+.welcome-content .name {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    color: #094bb7;
+    margin-bottom: 1rem;
+    text-shadow: 
+        1px 1px 2px rgba(255, 255, 255, 0.4), 
+        2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: #f1f5f9;
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    min-width: 700px;
+    text-shadow: 
+        1px 1px 2px rgba(255, 255, 255, 0.4), 
+        2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode */
+[data-theme="dark"] .welcome-content .name {
+    color: #22d3ee;
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5), 
+        2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .subtitle {
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5), 
+        2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Welcome Actions */
+.welcome-actions {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    flex-wrap: wrap;
+}
+
+.welcome-actions .btn,
+.welcome-actions .btn-alt {
+    width: clamp(150px, 45vw, 200px);
+    padding: clamp(0.6rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+/* Contact Section */
+.contact-section {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--accentbox-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.form-group textarea {
+    height: 200px;
+    resize: vertical;
+    min-height: 150px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--glow-color);
+    background-color: #ffffff;
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+    color: #1f2937;
+}
+
+.contact-form button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.contact-form button:hover {
+    background-color: #2563eb;
+}
+
+/* Contact Links */
+.contact-links {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contact-links p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-links i {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+.contact-links span {
+    color: var(--text-color);
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.contact-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.contact-links a:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.contact-links p:last-child a:not(:last-child):after {
+    content: "|";
+    margin: 0 0.5rem;
+    color: var(--text-color);
+}
+
+/* Flash message styles */
+.flash-container {
+    margin-bottom: 15px;
+}
+
+/* Highlights Section */
+.highlights {
+    padding: clamp(2rem, 6vh, 3rem) 0;
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Projects Section */
+.projects {
+    padding: clamp(2rem, 6vh, 3rem) 0;
+    text-align: center;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.project-card img {
+    width: 100%;
+    max-height: 275px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.project-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.project-card p {
+    margin-bottom: 0.5rem;
+}
+
+.project-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.projects .btn {
+    margin-top: 2rem;
+}
+
+/* About Page */
+.about {
+    padding: clamp(2rem, 6vh, 3rem) 0;
+    width: 100%;
+    text-align: center;
+}
+
+.about-img {
+    display: block;
+    width: 100%;
+    max-width: 125px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    margin: 0 auto 2rem auto;
+}
+
+.about-text {
+    max-width: 950px;
+    margin: 0 auto 2rem;
+    text-align: left;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.8;
+}
+
+.highlights-box {
+    width: 100%;
+    margin: 0;
+    background-color: var(--highlight-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.highlights-box h3 {
+    color: var(--accent-color);
+    font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.highlights-box ul {
+    list-style: none;
+}
+
+.highlights-box .highlight-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-weight: normal;
+    text-align: left;
+    transition: color 0.3s, transform 0.3s, box-shadow: 0.3s;
+}
+
+.highlights-box .highlight-item:before {
+    content: "★";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+.highlights-box .highlight-item:hover {
+    color: var(--accent-hover);
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* Certifications and Awards */
+.certifications {
+    padding: clamp(2rem, 6vh, 3rem) 0;
+    width: 100%;
+    text-align: center;
+}
+
+.certification-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.certification-item {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+}
+
+.certification-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.certification-img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.certification-item h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.certification-item p {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+}
+
+/* Modal for Full-Size Image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 80vh;
+}
+
+#modalImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--glow-color);
+}
+
+/* Portfolio Page */
+.portfolio {
+    padding: clamp(2rem, 6vh, 3rem) 0;
+    text-align: center;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.3s;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .welcome-content {
+        max-width: clamp(500px, 90vw, 800px);
+        width: clamp(90%, 95vw, 100%);
+    }
+
+    .welcome-content .name {
+        font-size: clamp(3rem, 5.5vw, 4rem);
+    }
+
+    .subtitle {
+        font-size: clamp(1rem, 2.8vw, 1.3rem);
+        white-space: normal;
+        min-width: auto;
+        max-width: 95%;
+    }
+
+    .welcome-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .welcome-actions .btn,
+    .welcome-actions .btn-alt {
+        width: clamp(200px, 80vw, 300px);
+    }
+
+    .contact-form {
+        max-width: 500px;
+        padding: 1.5rem;
+    }
+
+    .about-text {
+        max-width: clamp(90%, 800px, 95%);
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome {
+        min-height: 50vh;
+    }
+
+    .welcome-content {
+        max-width: clamp(300px, 95vw, 600px);
+        width: clamp(90%, 98vw, 100%);
+        padding: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .welcome-content .name {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+
+    .subtitle {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        max-width: 90%;
+    }
+
+    .welcome-actions .btn,
+    .welcome-actions .btn-alt {
+        width: clamp(180px, 85vw, 280px);
+    }
+
+    .contact-section {
+        width: 90%;
+    }
+
+    .contact-form {
+        max-width: 90%;
+        padding: 1rem;
+    }
+
+    .contact-links {
+        margin-bottom: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: clamp(0.85rem, 2vw, 0.95rem);
+    }
+
+    .form-group label {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .about-text {
+        max-width: 90%;
+    }
+
+    .project-card img {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-content {
+        padding: clamp(0.8rem, 2.5vw, 1.2rem);
+    }
+
+    .welcome-content .name {
+        font-size: clamp(2rem, 4.5vw, 3rem);
+    }
+
+    .subtitle {
+        font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+        max-width: 95%;
+    }
+
+    .welcome-actions .btn,
+    .welcome-actions .btn-alt {
+        width: clamp(160px, 90vw, 250px);
+    }
+
+    .contact-section {
+        padding: 0.8rem;
+    }
+
+    .contact-form {
+        padding: 0.8rem;
+    }
+
+    .contact-links {
+        margin-bottom: 0.8rem;
+    }
+
+    .contact-links p {
+        font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+    }
+
+    .contact-links span {
+        min-width: 70px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .about-img {
+        max-width: 100px;
+    }
+
+    .certification-img {
+        max-height: 120px;
+    }
+
+    .modal-content {
+        width: 95vw;
+        height: 65vh;
+    }
+
+    .modal-close {
+        font-size: 2rem;
+        right: 20px;
+    }
+
+    .about-text {
+        max-width: 95%;
+    }
+
+    .project-card img {
+        max-height: 120px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .subtitle {
+        min-width: 700px;
+    }
+}

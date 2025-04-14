@@ -1,0 +1,88 @@
+<?php
+$title = "Michael Jolley - Network Security";
+include 'header.php'; // Include header and navigation
+?>
+
+<section class="project-detail">
+    <h2>Network Configuration</h2>
+    <div class="project-content">
+        <h3>Project Overview</h3>
+        <p>Originally a PowerShell script, now built into a C# w/ .NET application. This quickly lets technicians configure IP adapter information on PCs after installation!</p>
+
+        <h3>Project Images</h3>
+        <div class="project-images">
+            <?php
+            $images = ["networkconf.jpg", "networkconfi.jpg"];
+            foreach ($images as $img) {
+                echo "<img src='/assets/img/{$img}' alt='Network Configuration Image' class='project-img'>";
+            }
+            ?>
+        </div>
+
+        <h3>Base Code/Configuration</h3>
+        <p>Below is a snippet of the Network Configuration app:</p>
+        <pre class="code-snippet">
+private void btnApplyNetwork_Click(object sender, RoutedEventArgs e)
+{
+    try
+    {
+        if (cmbNetworkAdapters.SelectedItem == null)
+        {
+            MessageBox.Show("Please select a network adapter first.", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        NetworkInterface selectedAdapter = (NetworkInterface)cmbNetworkAdapters.SelectedItem;
+        Process process = new Process();
+        process.StartInfo.FileName = "netsh";
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.CreateNoWindow = true;
+
+        if (!string.IsNullOrEmpty(txtIPAddress.Text) && !string.IsNullOrEmpty(txtSubnet.Text))
+        {
+            string gateway = string.IsNullOrEmpty(txtGateway.Text) ? "none" : txtGateway.Text;
+            process.StartInfo.Arguments = $"interface ip set address name=\"{selectedAdapter.Name}\" " +
+                $"source=static addr={txtIPAddress.Text} mask={txtSubnet.Text} gateway={gateway}";
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                throw new Exception($"Failed to set IP/Subnet: {output}");
+            }
+        }
+
+        if (!string.IsNullOrEmpty(txtDNS1.Text))
+        {
+            process.StartInfo.Arguments = $"interface ip set dns name=\"{selectedAdapter.Name}\" " +
+                $"source=static addr={txtDNS1.Text}";
+            process.Start();
+            process.WaitForExit();
+
+            if (!string.IsNullOrEmpty(txtDNS2.Text))
+            {
+                process.StartInfo.Arguments = $"interface ip add dns name=\"{selectedAdapter.Name}\" " +
+                    $"addr={txtDNS2.Text} index=2";
+                process.Start();
+                process.WaitForExit();
+            }
+        }
+
+        MessageBox.Show("Network settings applied successfully! Some changes may require a restart.",
+            "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Error applying network settings: {ex.Message}", "Error",
+            MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+}
+        </pre>
+    </div>
+    <a href="/portfolio" class="btn">Back to Portfolio</a>
+</section>
+
+<?php include 'footer.php'; // Include footer ?>
