@@ -29,20 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
-        nav.classList.toggle('active');
+        nav.classList.toggle('nav-active');
+        console.log('Hamburger toggled:', nav.classList.contains('nav-active') ? 'Menu open' : 'Menu closed');
     });
 
     // Close menu when a link is clicked
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
-            nav.classList.remove('active');
+            nav.classList.remove('nav-active');
+            console.log('Nav link clicked, menu closed');
         });
     });
 
     // Close menu when theme toggle is clicked
     toggleButton.addEventListener('click', () => {
         hamburger.classList.remove('active');
-        nav.classList.remove('active');
+        nav.classList.remove('nav-active');
+        console.log('Theme toggle clicked, menu closed');
     });
 });
